@@ -1,0 +1,11 @@
+{{- if .Values.budget.minAvailable -}}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: "{{ template "pwa-apps.fullname" . }}"
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "pwa-apps.name" . }}
+  minAvailable: {{ .Values.budget.minAvailable }}
+{{- end -}}
